@@ -24,8 +24,6 @@ class RSA:
     @staticmethod
     def blockPlainTextToAscii(text:str) -> List[str]:
         block_text = list(text.encode('ascii'))
-        for i in range(len(block_text)):
-            block_text[i] = str(block_text[i]).zfill(10)
         return block_text
 
     @staticmethod
@@ -38,7 +36,7 @@ class RSA:
         plains_ascii = RSA.blockPlainTextToAscii(text)
         result_ascii = []
         for i in range(len(plains_ascii)):
-            plain = int(plains_ascii[i])
+            plain = plains_ascii[i]
             cipher = pow(plain, public_key[0], public_key[1])
             cipher = str(cipher).zfill(10)
             result_ascii.append(cipher)
@@ -52,7 +50,7 @@ class RSA:
         for i in range(len(ciphers_ascii)):
             cipher = int(ciphers_ascii[i])
             plain = pow(cipher, private_key[0], private_key[1])
-            plain = chr(int(str(plain).lstrip('0')))
+            plain = chr(plain)
             plain_ascii.append(plain)
         plain_ascii = "".join(plain_ascii)
         return plain_ascii
