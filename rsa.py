@@ -4,7 +4,6 @@ from math import gcd
 import random
 
 class RSA:
-
     @staticmethod
     def generateKey() -> List[List[int]]:
         random_prime=[randprime(1,46341), randprime(1,46341)]

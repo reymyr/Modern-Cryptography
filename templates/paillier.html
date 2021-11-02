@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Paillier - {{mode}}</title>
+{% endblock %}
+
+{% block body %}
+<!-- MAIN -->
+<div class="col p-4">
+    <h1 class="display-4">Paillier</h1>
+    {% if mode=="Generate" %}
+    <a class="btn btn-primary" href="/paillier/generate" role="button">Generate Key</a>
+    <a class="btn btn-secondary" href="/paillier/encrypt" role="button">Encryption</a>
+    <a class="btn btn-secondary" href="/paillier/decrypt" role="button">Decryption</a>
+    <div class="card">
+        <div class="card-body">
+            <form action="/paillier/generate" method="POST">
+                <button type="submit" class="btn btn-primary">Generate Key</button>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Key</h5>
+        <div class="card-body">
+            <form action="/savepublickey" method="POST">
+                <div class="form-group">    
+                    <label for="text">Public Key</label>
+                    <input type="text" readonly class="form-control" name="public" value="{{public}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Public Key</button>
+            </form>
+            <form action="/saveprivatekey" method="POST">
+                <div class="form-group">    
+                    <label for="text">Private Key</label>
+                    <input type="text" readonly class="form-control" name="private" value="{{private}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Private Key</button>
+            </form>
+        </div>
+    </div>
+    {% elif mode=="Encrypt" %}
+    <a class="btn btn-secondary" href="/paillier/generate" role="button">Generate Key</a>
+    <a class="btn btn-primary" href="/paillier/encrypt" role="button">Encryption</a>
+    <a class="btn btn-secondary" href="/paillier/decrypt" role="button">Decryption</a>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Requirements</h5>
+        <div class="card-body">
+            <form action="/paillier/encrypt" method="POST">
+                <h6 class="card-header font-weight-light">Public Key = [g, n]</h6>
+                <div class="form-group">
+                    <label for="text1">g</label>
+                    <input type="number" class="form-control" name="text1" placeholder="Enter value of g here" value="{{g}}">
+                </div>
+                <div class="form-group">
+                    <label for="text2">n</label>
+                    <input type="number" class="form-control" name="text2" placeholder="Enter value of n here" value="{{n}}">
+                </div>
+                <div class="form-group">
+                    <label for="text3">Plaintext</label>
+                    <input type="text" class="form-control" name="text3" placeholder="Enter plaintext here" id="text-input" value="{{plaintext}}">
+                    <input type="file" class="form-control-file" name="file" id="text-file-input">
+                </div>
+                <button type="submit" class="btn btn-primary">Encipher Plaintext</button>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Result</h5>
+        <div class="card-body">
+            <form action="/saveresult" method="POST">
+                <div class="form-group">    
+                    <label for="text">Ciphertext</label>
+                    <input type="text" readonly class="form-control" name="result" value="{{result}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <a class="btn btn-secondary" href="/paillier/generate" role="button">Generate Key</a>
+    <a class="btn btn-secondary" href="/paillier/encrypt" role="button">Encryption</a>
+    <a class="btn btn-primary" href="/paillier/decrypt" role="button">Decryption</a>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Requirements</h5>
+        <div class="card-body">
+            <form action="/paillier/decrypt" method="POST">
+                <h6 class="card-header font-weight-light">Public Key = [g, n]</h6>
+                <div class="form-group">
+                    <label for="text1">g</label>
+                    <input type="number" class="form-control" name="text1" placeholder="Enter value of g here" value="{{g}}">
+                </div>
+                <div class="form-group">
+                    <label for="text2">n</label>
+                    <input type="number" class="form-control" name="text2" placeholder="Enter value of n here" value="{{n}}">
+                </div>
+                <h6 class="card-header font-weight-light">Private Key = [lambda, mu]</h6>
+                <div class="form-group">
+                    <label for="text3">lambda</label>
+                    <input type="number" class="form-control" name="text3" placeholder="Enter value of lambda here" value="{{lambdaa}}">
+                </div>
+                <div class="form-group">
+                    <label for="text4">mu</label>
+                    <input type="number" class="form-control" name="text4" placeholder="Enter value of mu here" value="{{mu}}">
+                </div>
+                <div class="form-group">
+                    <label for="text5">Ciphertext</label>
+                    <input type="text" class="form-control" name="text5" placeholder="Enter ciphertext here" id="text-input" value="{{ciphertext}}">
+                    <input type="file" class="form-control-file" name="file" id="text-file-input">
+                </div>
+                <button type="submit" class="btn btn-primary">Decipher Ciphertext</button>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Result</h5>
+        <div class="card-body">
+            <form action="/saveresult" method="POST">
+                <div class="form-group">    
+                    <label for="text">Plaintext</label>
+                    <input type="text" readonly class="form-control" name="result" value="{{result}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div><!-- Main Col END -->
+{% endblock %}

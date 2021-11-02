@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Home - Cypher</title>
+{% endblock %}
+
+{% block body %}
+<!-- MAIN -->
+<div class="container p-4 d-flex align-items-center flex-column">
+    <!-- Masthead Avatar Image-->
+    <img class="masthead-avatar mb-5" src="{{url_for('static', filename='images/cypher.png')}}" alt="..." />
+    <!-- Masthead Heading-->
+    <h1 class="masthead-heading text-uppercase mb-0">Cypher</h1>
+    <p class="masthead-subheading font-weight-light mb-0">Plaintext Encoder and Ciphertext Decoder</p>
+    <!-- Icon Divider-->
+    <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+    </div>
+    <!-- Masthead Subheading-->
+    <p class="masthead-subheading font-weight-light mb-0">Vigenere Cipher - Playfair Cipher - Affine Cipher - Hill Cipher</p>
+    <!-- Icon Divider-->
+    <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+    </div>
+    <p class="masthead-subheading font-weight-light mb-0">Made By</p>
+    <p class="masthead-subheading font-weight-light mb-0">Gde Anantha Priharsena (13519026)</p>
+    <p class="masthead-subheading font-weight-light mb-0">Reyhan Emyr Arrosyid   (13519167)</p>
+</div>
+
+{% endblock %}
