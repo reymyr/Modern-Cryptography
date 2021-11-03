@@ -121,22 +121,22 @@
 
             document.getElementById('public-key-file-input').addEventListener('change', handlePublicKeyFileSelect, false);
             
-            function handlePrivatKeyFileSelect(event) {
+            function handlePrivateKeyFileSelect(event) {
                 const reader = new FileReader()
-                reader.onload = handlePrivatKeyFileLoad;
+                reader.onload = handlePrivateKeyFileLoad;
                 reader.readAsText(event.target.files[0])
             }
 
-            function handlePrivatKeyFileLoad(event) {
+            function handlePrivateKeyFileLoad(event) {
                 console.log(event);
                 var key = event.target.result;
                 key = key.replace('[', '').replace(']', '').replace(' ', '');
                 arr_key = key.split(",")
-                document.getElementById('privat1').value = arr_key[0];
-                document.getElementById('privat2').value = arr_key[1];
+                document.getElementById('private1').value = arr_key[0];
+                document.getElementById('private2').value = arr_key[1];
             }            
 
-            document.getElementById('privat-key-file-input').addEventListener('change', handlePrivatKeyFileSelect, false);
+            document.getElementById('private-key-file-input').addEventListener('change', handlePrivateKeyFileSelect, false);
             
         </script>
     </body>

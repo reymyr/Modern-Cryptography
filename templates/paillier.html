@@ -47,13 +47,14 @@
         <div class="card-body">
             <form action="/paillier/encrypt" method="POST">
                 <h6 class="card-header font-weight-light">Public Key = [g, n]</h6>
+                <input type="file" class="form-control-file" name="file" id="public-key-file-input">
                 <div class="form-group">
                     <label for="text1">g</label>
-                    <input type="number" class="form-control" name="text1" placeholder="Enter value of g here" value="{{g}}">
+                    <input type="number" class="form-control" name="text1" placeholder="Enter value of g here" id="public1" value="{{g}}">
                 </div>
                 <div class="form-group">
                     <label for="text2">n</label>
-                    <input type="number" class="form-control" name="text2" placeholder="Enter value of n here" value="{{n}}">
+                    <input type="number" class="form-control" name="text2" placeholder="Enter value of n here" id="public2" value="{{n}}">
                 </div>
                 <div class="form-group">
                     <label for="text3">Plaintext</label>
@@ -85,22 +86,24 @@
         <div class="card-body">
             <form action="/paillier/decrypt" method="POST">
                 <h6 class="card-header font-weight-light">Public Key = [g, n]</h6>
+                <input type="file" class="form-control-file" name="file" id="public-key-file-input">
                 <div class="form-group">
                     <label for="text1">g</label>
-                    <input type="number" class="form-control" name="text1" placeholder="Enter value of g here" value="{{g}}">
+                    <input type="number" class="form-control" name="text1" placeholder="Enter value of g here" id="public1" value="{{g}}">
                 </div>
                 <div class="form-group">
                     <label for="text2">n</label>
-                    <input type="number" class="form-control" name="text2" placeholder="Enter value of n here" value="{{n}}">
+                    <input type="number" class="form-control" name="text2" placeholder="Enter value of n here" id="public2" value="{{n}}">
                 </div>
                 <h6 class="card-header font-weight-light">Private Key = [lambda, mu]</h6>
+                <input type="file" class="form-control-file" name="file" id="private-key-file-input">
                 <div class="form-group">
                     <label for="text3">lambda</label>
-                    <input type="number" class="form-control" name="text3" placeholder="Enter value of lambda here" value="{{lambdaa}}">
+                    <input type="number" class="form-control" name="text3" placeholder="Enter value of lambda here" id="private1" value="{{lambdaa}}">
                 </div>
                 <div class="form-group">
                     <label for="text4">mu</label>
-                    <input type="number" class="form-control" name="text4" placeholder="Enter value of mu here" value="{{mu}}">
+                    <input type="number" class="form-control" name="text4" placeholder="Enter value of mu here" id="private2" value="{{mu}}">
                 </div>
                 <div class="form-group">
                     <label for="text5">Ciphertext</label>
