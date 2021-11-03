@@ -91,6 +91,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
         </script>
         <script>
+
             function handleFileSelect(event) {
                 const reader = new FileReader()
                 reader.onload = handleFileLoad;
@@ -101,9 +102,10 @@
                 console.log(event);
                 document.getElementById('text-input').value = event.target.result;
             }            
-
-            document.getElementById('text-file-input').addEventListener('change', handleFileSelect, false);
-
+            if (document.getElementById('text-file-input')) {
+                document.getElementById('text-file-input').addEventListener('change', handleFileSelect, false);
+            }
+            
             function handlePublicKeyFileSelect(event) {
                 const reader = new FileReader()
                 reader.onload = handlePublicKeyFileLoad;
@@ -113,14 +115,20 @@
             function handlePublicKeyFileLoad(event) {
                 console.log(event);
                 var key = event.target.result;
-                key = key.replace('[', '').replace(']', '').replace(' ', '');
+                key = key.replace('[', '').replace(']', '').replace('(', '').replace(')', '').replaceAll(' ', '');
+                console.log(key);
                 arr_key = key.split(",")
-                document.getElementById('public1').value = arr_key[0];
-                document.getElementById('public2').value = arr_key[1];
+                console.log(arr_key)
+                arr_key.forEach((val, idx) => {
+                    console.log('public'+(idx+1))
+                    document.getElementById('public'+(idx+1)).value = arr_key[idx];
+                });
             }            
 
-            document.getElementById('public-key-file-input').addEventListener('change', handlePublicKeyFileSelect, false);
-            
+            if (document.getElementById('public-key-file-input')) {
+                document.getElementById('public-key-file-input').addEventListener('change', handlePublicKeyFileSelect, false);
+            }
+
             function handlePrivateKeyFileSelect(event) {
                 const reader = new FileReader()
                 reader.onload = handlePrivateKeyFileLoad;
@@ -130,10 +138,12 @@
             function handlePrivateKeyFileLoad(event) {
                 console.log(event);
                 var key = event.target.result;
-                key = key.replace('[', '').replace(']', '').replace(' ', '');
+                key = key.replace('[', '').replace(']', '').replace('(', '').replace(')', '').replaceAll(' ', '');
                 arr_key = key.split(",")
-                document.getElementById('private1').value = arr_key[0];
-                document.getElementById('private2').value = arr_key[1];
+                arr_key.forEach((val, idx) => {
+                    console.log('private'+(idx+1))
+                    document.getElementById('private'+(idx+1)).value = arr_key[idx];
+                });
             }            
 
             document.getElementById('private-key-file-input').addEventListener('change', handlePrivateKeyFileSelect, false);
