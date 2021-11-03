@@ -29,8 +29,8 @@ class Paillier:
         return block_text
 
     @staticmethod
-    def blockCipherTextToAscii(text:str, g: int) -> List[str]:
-        block_text = [text[i:i+len(str(g))] for i in range(0, len(text), len(str(g)))]
+    def blockCipherTextToAscii(text:str) -> List[str]:
+        block_text = [text[i:i+10] for i in range(0, len(text), 10)]
         return block_text
 
     @staticmethod
@@ -44,14 +44,14 @@ class Paillier:
             plain = plains_ascii[i]
             plain = pow(public_key[0], plain)*pow(r, public_key[1])
             cipher = plain % pow(public_key[1],2)
-            cipher = str(cipher).zfill(len(str(public_key[0])))
+            cipher = str(cipher).zfill(10)
             result_ascii.append(cipher)
         result_ascii = "".join(result_ascii)
         return result_ascii
 
     @staticmethod
     def decrypt(text:str, public_key:List[int], private_key:List[int]) -> str:
-        ciphers_ascii = Paillier.blockCipherTextToAscii(text, public_key[0])
+        ciphers_ascii = Paillier.blockCipherTextToAscii(text)
         plain_ascii = []
         for i in range(len(ciphers_ascii)):
             cipher = int(ciphers_ascii[i])
