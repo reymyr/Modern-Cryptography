@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>ECC - {{mode}}</title>
+{% endblock %}
+
+{% block body %}
+<!-- MAIN -->
+<div class="col p-4">
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{error}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+    <h1 class="display-4">ECC</h1>
+    {% if mode=="Generate" %}
+    <a class="btn btn-primary" href="/ecc/generate" role="button">Generate Key</a>
+    <a class="btn btn-secondary" href="/ecc/encrypt" role="button">Encryption</a>
+    <a class="btn btn-secondary" href="/ecc/decrypt" role="button">Decryption</a>
+    <div class="card">
+        <div class="card-body">
+            <form action="/ecc/generate" method="POST">
+                <button type="submit" class="btn btn-primary">Generate Key</button>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Key</h5>
+        <div class="card-body">
+            <form action="/savepublickey" method="POST">
+                <div class="form-group">    
+                    <label for="text">Public Key</label>
+                    <input type="text" readonly class="form-control" name="public" value="{{public}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Public Key</button>
+            </form>
+            <form action="/saveprivatekey" method="POST">
+                <div class="form-group">    
+                    <label for="text">Private Key</label>
+                    <input type="text" readonly class="form-control" name="private" value="{{private}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Private Key</button>
+            </form>
+        </div>
+    </div>
+    {% elif mode=="Encrypt" %}
+    <a class="btn btn-secondary" href="/ecc/generate" role="button">Generate Key</a>
+    <a class="btn btn-primary" href="/ecc/encrypt" role="button">Encryption</a>
+    <a class="btn btn-secondary" href="/ecc/decrypt" role="button">Decryption</a>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Requirements</h5>
+        <div class="card-body">
+            <form action="/ecc/encrypt" method="POST">
+                <h6 class="card-header font-weight-light">Public Key = (x, y)</h6>
+                <input type="file" class="form-control-file" name="file" id="public-key-file-input">
+                <div class="form-group">
+                    <label for="x">x</label>
+                    <input type="number" class="form-control" name="x" placeholder="Enter value of x here" id=public1 value="{{x}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="y">y</label>
+                    <input type="number" class="form-control" name="y" placeholder="Enter value of y here" id=public2 value="{{y}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="text">Plaintext</label>
+                    <input type="text" class="form-control" name="text" placeholder="Enter plaintext here" id="text-input" value="{{plaintext}}" required>
+                    <input type="file" class="form-control-file" name="file" id="text-file-input">
+                </div>
+                <button type="submit" class="btn btn-primary">Encipher Plaintext</button>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Result</h5>
+        <div class="card-body">
+            <form action="/saveresult" method="POST">
+                <div class="form-group">    
+                    <label for="text">Ciphertext</label>
+                    <input type="text" readonly class="form-control" name="result" value="{{result}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <a class="btn btn-secondary" href="/ecc/generate" role="button">Generate Key</a>
+    <a class="btn btn-secondary" href="/ecc/encrypt" role="button">Encryption</a>
+    <a class="btn btn-primary" href="/ecc/decrypt" role="button">Decryption</a>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Requirements</h5>
+        <div class="card-body">
+            <form action="/ecc/decrypt" method="POST">
+                <h6 class="card-header font-weight-light">Private Key = a</h6>
+                <input type="file" class="form-control-file" name="file" id="public-key-file-input">
+                <div class="form-group">
+                    <label for="a">a</label>
+                    <input type="number" class="form-control" name="a" placeholder="Enter value of a here" id="public1" value="{{a}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="text">Ciphertext</label>
+                    <input type="text" class="form-control" name="text" placeholder="Enter ciphertext here" id="text-input" value="{{ciphertext}}" required>
+                    <input type="file" class="form-control-file" name="file" id="text-file-input">
+                </div>
+                <button type="submit" class="btn btn-primary">Decipher Ciphertext</button>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Result</h5>
+        <div class="card-body">
+            <form action="/saveresult" method="POST">
+                <div class="form-group">    
+                    <label for="text">Plaintext</label>
+                    <input type="text" readonly class="form-control" name="result" value="{{result}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div><!-- Main Col END -->
+{% endblock %}
